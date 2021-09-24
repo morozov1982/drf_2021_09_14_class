@@ -1,9 +1,21 @@
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
 
-from .models import Author
-from .serializers import AuthorSerializer
+from .models import Author, Biography, Book
+from .serializers import AuthorSerializer, BiographySerializer, BookSerializer
 
 
 class AuthorViewSet(ModelViewSet):
     serializer_class = AuthorSerializer
     queryset = Author.objects.all()
+
+
+class BiographyViewSet(ModelViewSet):
+    # renderer_classes = [JSONRenderer, BrowsableAPIRenderer]
+    serializer_class = BiographySerializer
+    queryset = Biography.objects.all()
+
+
+class BookViewSet(ModelViewSet):
+    serializer_class = BookSerializer
+    queryset = Book.objects.all()
