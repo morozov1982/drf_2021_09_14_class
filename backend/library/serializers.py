@@ -1,9 +1,10 @@
+from rest_framework.relations import HyperlinkedRelatedField
 from rest_framework.serializers import ModelSerializer, HyperlinkedModelSerializer
 
 from .models import Author, Biography, Book
 
 
-class AuthorSerializer(HyperlinkedModelSerializer):  # (ModelSerializer):
+class AuthorSerializer(ModelSerializer):  # (HyperlinkedModelSerializer):
     class Meta:
         model = Author
         fields = '__all__'
@@ -11,6 +12,7 @@ class AuthorSerializer(HyperlinkedModelSerializer):  # (ModelSerializer):
 
 class BiographySerializer(ModelSerializer):
     # author = AuthorSerializer()
+    # author = HyperlinkedRelatedField(view_name='author-detail', read_only=True)
 
     class Meta:
         model = Biography
