@@ -20,7 +20,7 @@ class BiographySerializer(ModelSerializer):
 
 
 class BookSerializer(ModelSerializer):
-    authors = AuthorSerializer(many=True)
+    # authors = AuthorSerializer(many=True)
 
     class Meta:
         model = Book

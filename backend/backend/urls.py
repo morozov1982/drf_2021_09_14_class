@@ -24,7 +24,7 @@ router = DefaultRouter()  # SimpleRouter()
 # router.register('authors', AuthorViewSet, basename='author')
 router.register('authors', AuthorViewSet, basename='author')  # можно указывать basename='authors' - имя модели
 router.register('biography', BiographyViewSet)
-router.register('book', BookViewSet)
+router.register('books', BookViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

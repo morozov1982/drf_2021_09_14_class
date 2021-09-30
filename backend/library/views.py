@@ -20,7 +20,7 @@ class AuthorViewSet(ModelViewSet):
     serializer_class = AuthorSerializer
     queryset = Author.objects.all()
     filterset_fields = ['first_name']
-    pagination_class = AuthorLimitOffsetPagination
+    # pagination_class = AuthorLimitOffsetPagination
 
     # def get_queryset(self):
     #     # return Author.objects.filter(first_name=self.kwargs['first_name'])
