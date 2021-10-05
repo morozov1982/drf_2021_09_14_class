@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter  # , SimpleRouter
+from rest_framework.authtoken.views import obtain_auth_token
 
 from library.views import AuthorViewSet, BiographyViewSet, BookViewSet
 # from library.views import author_view, AuthorListView, AuthorRetrieveView
@@ -32,5 +33,6 @@ urlpatterns = [
     # path('api/authors/<int:pk>/', AuthorRetrieveView.as_view()),
     path('api/authors/kwargs/<str:first_name>/', AuthorViewSet.as_view({'get': 'list'})),
     path('api-auth/', include('rest_framework.urls')),
+    path('api-token-auth/', obtain_auth_token),
     path('api/', include(router.urls)),
 ]
