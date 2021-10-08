@@ -14,13 +14,17 @@ const AuthorItem = ({author}) => {
 const AuthorList = ({authors}) => {
     return (
         <table>
-            <th>Имя</th>
-            <th>Фамилия</th>
-            <th>Год</th>
+            <thead>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Год</th>
+            </thead>
 
-            { authors.map(
-                (a) => <AuthorItem author={a} />
-            ) }
+            <tbody>
+                { authors.map(
+                    (a) => <AuthorItem author={a} />
+                ) }
+            </tbody>
         </table>
     )
 }

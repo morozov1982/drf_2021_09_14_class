@@ -24,7 +24,7 @@ class CustomPermission(BasePermission):
 
 
 class AuthorViewSet(ModelViewSet):
-    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]  # [CustomPermission]  # [IsAuthenticated]  # [DjangoModelPermissions]  # [IsAuthenticatedOrReadOnly]  # в методичке DjangoModelPermissionsOrAnonReadOnly
+    # permission_classes = [DjangoModelPermissionsOrAnonReadOnly]  # [CustomPermission]  # [IsAuthenticated]  # [DjangoModelPermissions]  # [IsAuthenticatedOrReadOnly]  # в методичке DjangoModelPermissionsOrAnonReadOnly
     serializer_class = AuthorSerializer
     queryset = Author.objects.all()
     # filterset_fields = ['first_name']

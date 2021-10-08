@@ -13,13 +13,17 @@ const BookItem = ({book}) => {
 const BookList = ({books}) => {
     return (
         <table>
-            <th>id</th>
-            <th>Название</th>
-            <th>Автор</th>
+            <thead>
+                <th>id</th>
+                <th>Название</th>
+                <th>Автор</th>
+            </thead>
 
-            { books.map(
-                (b) => <BookItem book={b} />
-            ) }
+            <tbody>
+                { books.map(
+                    (b) => <BookItem book={b} />
+                ) }
+            </tbody>
         </table>
     )
 }
