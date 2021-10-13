@@ -10,6 +10,12 @@ class AuthorSerializer(ModelSerializer):  # (HyperlinkedModelSerializer):
         fields = '__all__'
 
 
+class AuthorSerializerV2(ModelSerializer):  # (HyperlinkedModelSerializer):
+    class Meta:
+        model = Author
+        fields = ['first_name', 'last_name']
+
+
 class BiographySerializer(ModelSerializer):
     # author = AuthorSerializer()
     # author = HyperlinkedRelatedField(view_name='author-detail', read_only=True)

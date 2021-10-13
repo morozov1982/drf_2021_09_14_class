@@ -79,6 +79,13 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     ],
+    # http://127.0.0.1:8000/api/v1/authors/
+    # http://127.0.0.1:8000/api/v2/authors/
+    # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
+
+    # http://127.0.0.1:8000/api/authors/v1
+    # http://127.0.0.1:8000/api/authors/v2
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
 }
 
 if DEBUG:

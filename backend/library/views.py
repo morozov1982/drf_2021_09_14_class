@@ -11,7 +11,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly, DjangoModelPer
                                        IsAuthenticated, DjangoModelPermissionsOrAnonReadOnly
 
 from .models import Author, Biography, Book
-from .serializers import AuthorSerializer, BiographySerializer, BookSerializer
+from .serializers import AuthorSerializer, BiographySerializer, BookSerializer, AuthorSerializerV2
 
 
 class AuthorLimitOffsetPagination(LimitOffsetPagination):
@@ -25,10 +25,15 @@ class CustomPermission(BasePermission):
 
 class AuthorViewSet(ModelViewSet):
     # permission_classes = [DjangoModelPermissionsOrAnonReadOnly]  # [CustomPermission]  # [IsAuthenticated]  # [DjangoModelPermissions]  # [IsAuthenticatedOrReadOnly]  # в методичке DjangoModelPermissionsOrAnonReadOnly
-    serializer_class = AuthorSerializer
-    queryset = Author.objects.all()
+    # serializer_class = AuthorSerializer
     # filterset_fields = ['first_name']
     # pagination_class = AuthorLimitOffsetPagination
+    queryset = Author.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.version == 'v2':
+            return AuthorSerializerV2
+        return AuthorSerializer
 
     # def get_queryset(self):
     #     # return Author.objects.filter(first_name=self.kwargs['first_name'])
