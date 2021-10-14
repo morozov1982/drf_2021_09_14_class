@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_filters',
 
+    'drf_yasg',
+
     'library',
 ]
 
@@ -85,7 +87,13 @@ REST_FRAMEWORK = {
 
     # http://127.0.0.1:8000/api/authors/v1
     # http://127.0.0.1:8000/api/authors/v2
-    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
+    # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
+
+    # http://127.0.0.1:8000/api/authors/?version=v2
+    # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.QueryParameterVersioning',
+
+    # http://127.0.0.1:8000/api/authors/
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.AcceptHeaderVersioning',
 }
 
 if DEBUG:
