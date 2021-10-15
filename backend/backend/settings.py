@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'django_filters',
-
     'drf_yasg',
+    'graphene_django',
 
     'library',
 ]
@@ -149,6 +149,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+GRAPHENE = {
+    "SCHEMA": "library.schema.schema"
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/

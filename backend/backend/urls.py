@@ -15,12 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.permissions import AllowAny
 from rest_framework.routers import DefaultRouter  # , SimpleRouter
 from rest_framework.authtoken.views import obtain_auth_token
 
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+
+from graphene_django.views import GraphQLView
 
 from library.views import AuthorViewSet, BiographyViewSet, BookViewSet
 # from library.views import author_view, AuthorListView, AuthorRetrieveView
@@ -56,4 +59,7 @@ urlpatterns = [
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0)),
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui()),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+
+    # path('graphql/', GraphQLView.as_view(graphiql=True)),
+    path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True))),
 ]
