@@ -14,13 +14,13 @@ from .models import Author, Biography, Book
 from .serializers import AuthorSerializer, BiographySerializer, BookSerializer, AuthorSerializerV2
 
 
-class AuthorLimitOffsetPagination(LimitOffsetPagination):
-    default_limit = 1
+# class AuthorLimitOffsetPagination(LimitOffsetPagination):
+#     default_limit = 1
 
 
-class CustomPermission(BasePermission):
-    def has_permission(self, request, view):
-        return request.user.is_staff
+# class CustomPermission(BasePermission):
+#     def has_permission(self, request, view):
+#         return request.user.is_staff
 
 
 class AuthorViewSet(ModelViewSet):

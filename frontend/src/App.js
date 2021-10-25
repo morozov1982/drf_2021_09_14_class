@@ -5,6 +5,7 @@ import AuthorList from './components/Authors';
 import BookList from "./components/Books";
 import AuthorBookList from "./components/AuthorBooks";
 import LoginForm from "./components/LoginForm";
+import BookForm from "./components/BookForm";
 
 const NotFound = ({location}) => {
     return (<div>Страница с адресом: {location.pathname} не найдена!</div>)
@@ -47,6 +48,38 @@ class App extends React.Component {
             return {'Authorization': 'Token ' + this.state.token}
         }
         return {}
+    }
+
+    createBook(title, authors) {
+        // console.log(title, authors)
+
+        const headers = this.getHeaders()
+        axios.post('http://127.0.0.1:8000/api/books/', {'title': title, 'authors': authors}, {headers})
+            .then(response => {
+                this.loadData();
+                // const books = response.data
+                // this.setState({
+                //     'books': books
+                // })
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+    deleteBook(id) {
+        // console.log(id)
+
+        const headers = this.getHeaders()
+        axios.delete(`http://127.0.0.1:8000/api/books/${id}/`, {headers})
+            .then(response => {
+                this.setState({
+                    'books': this.state.books.filter((book) => book.id !== id)
+                })
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
     loadData() {
@@ -93,8 +126,9 @@ class App extends React.Component {
                         <ul>
                             <li><Link to='/'>Авторы</Link></li>
                             <li><Link to='/books'>Книги</Link></li>
+                            <li><Link to='/books/create'>Создать книгу</Link></li>
                             <li>
-                                { this.isAuthenticated() ?
+                                {this.isAuthenticated() ?
                                     <button onClick={() => this.logout()}>Logout</button> :
                                     <Link to='/login'>Login</Link>
                                 }
@@ -104,7 +138,10 @@ class App extends React.Component {
 
                     <Switch>
                         <Route exact path='/' component={() => <AuthorList authors={this.state.authors}/>}/>
-                        <Route exact path='/books' component={() => <BookList books={this.state.books}/>}/>
+                        <Route exact path='/books' component={() => <BookList books={this.state.books}
+                                                                              deleteBook={(id) => this.deleteBook(id)}/>}/>
+                        <Route exact path='/books/create' component={() => <BookForm authors={this.state.authors}
+                                                                                     createBook={(title, authors) => this.createBook(title, authors)}/>}/>
                         <Route exact path='/login' component={() => <LoginForm
                             getToken={(login, password) => this.getToken(login, password)}/>}/>
                         <Route path='/author/:id' component={() => <AuthorBookList books={this.state.books}/>}/>
